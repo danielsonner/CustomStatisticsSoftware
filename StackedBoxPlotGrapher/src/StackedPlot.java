@@ -1,6 +1,7 @@
 /**
  * Currently does not support negative numbers or decimals and the number
  * set must be greater than 5 apart (ex 2,3,4,5,6 is bad but 2,3,4,5,7 is fine).
+ * @author Daniel Sonner
  */
 import java.util.ArrayList;
 
@@ -9,6 +10,8 @@ import javax.swing.JOptionPane;
 
 
 public class StackedPlot {
+	final static int WINDOW_WIDTH = 800;
+	final static int WINDOW_HEIGHT = 600;
 
 	public static void main(String[] args)
 	{
@@ -29,7 +32,7 @@ public class StackedPlot {
 		
 		// Generate the graph
 		JFrame frmMyWindow = new JFrame("Stacked Box Plotter");
-		frmMyWindow.setSize(800,600);
+		frmMyWindow.setSize(WINDOW_WIDTH,WINDOW_HEIGHT);
 		// centers it
 		frmMyWindow.setLocationRelativeTo(null);
 		frmMyWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

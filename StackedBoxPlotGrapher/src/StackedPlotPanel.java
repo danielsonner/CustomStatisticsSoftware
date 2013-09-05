@@ -1,3 +1,7 @@
+/**
+ * This panel displays the multi box plot
+ * @author Daniel Sonner
+ */
 import java.awt.Graphics;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -13,7 +17,7 @@ class StackedPlotPanel extends JPanel {
 	final static int LABEL_LOWER_AMT = 20;
 	final static int NUM_OF_TICKS = 6;
 	final static double SCALE_EXTRA_DISTANCE_FACTOR = .1;
-	final static int MAX_HEIGHT_PER_BOXPLOT = 150;
+	final static int MAX_HEIGHT_PER_BOXPLOT = 200;
 	final static int HEIGHT_ABOVE_NUMLINE = 50; 
 	final static int PADDING_BTWN_BOXES = 15;
 
@@ -24,6 +28,12 @@ class StackedPlotPanel extends JPanel {
 	// Used to create a scale
 	private double min, max;
 
+	/**
+	 * Constructs a new JPanel for the Stacked Boxplot
+	 * @param d an array list of array lists of the data
+	 * @param titles an array list of the titles for each dataset in the order
+	 * they appear in ArrayList d.
+	 */
 	public StackedPlotPanel(ArrayList<ArrayList<Double>> d, ArrayList<String> titles)
 	{
 		super();
@@ -82,6 +92,7 @@ class StackedPlotPanel extends JPanel {
 			// Initialize values to zero so it doesn't complain
 			int xZero = 0;
 			int xQuartOne = 0;
+			int xQuartThree = 0;
 			for (int j = 0; j < 5; j++)
 			{
 				System.out.println(currentSummary.get(j));
@@ -90,16 +101,20 @@ class StackedPlotPanel extends JPanel {
 					xZero = x;
 				if (j == 1)
 					xQuartOne = x;
+				if (j == 3)
+					xQuartThree = x;
 				int lowerY = WORKABLE_HEIGHT_PIX - HEIGHT_ABOVE_NUMLINE - 
 						(i * (heightPerGraph + PADDING_BTWN_BOXES));
 				g.drawLine(x, lowerY, x, lowerY - heightPerGraph);
 				
-				// Draw the horizontal line from min to max once
+				// Draw the horizontal line from min to max once but not in box
 				if (j == 4)
 				{
 					int middleY = lowerY - (int)Math.round(.5 * heightPerGraph);
-					g.drawLine(xZero, middleY, x, middleY);
-					// Draw the title of the graph over the graph
+					g.drawLine(xZero, middleY, xQuartOne, middleY);
+					g.drawLine(xQuartThree, middleY, x, middleY);
+					
+					// Draw the title of the graph
 					g.drawString(boxPlotTitles.get(i), xZero, lowerY + PADDING_BTWN_BOXES);
 				}
 				// Draw the box
