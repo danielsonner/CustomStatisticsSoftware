@@ -17,7 +17,7 @@ class StackedPlotPanel extends JPanel {
 	final static int LABEL_LOWER_AMT = 20;
 	final static int NUM_OF_TICKS = 6;
 	final static double SCALE_EXTRA_DISTANCE_FACTOR = .1;
-	final static int MAX_HEIGHT_PER_BOXPLOT = 200;
+	final static int MAX_HEIGHT_PER_BOXPLOT = 110;
 	final static int HEIGHT_ABOVE_NUMLINE = 50; 
 	final static int PADDING_BTWN_BOXES = 15;
 
