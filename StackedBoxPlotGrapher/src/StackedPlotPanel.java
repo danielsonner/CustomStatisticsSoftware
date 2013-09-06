@@ -20,7 +20,7 @@ class StackedPlotPanel extends JPanel {
 	final static int MAX_HEIGHT_PER_BOXPLOT = 110;
 	final static int HEIGHT_ABOVE_NUMLINE = 50; 
 	final static int PADDING_BTWN_BOXES = 15;
-	final static int MIN_DATA_POINTS = 5;
+	final static int MIN_TRUNCATE_VALUE = 2;
 
 	private ArrayList<ArrayList<Double>> data;
 	private ArrayList<String> boxPlotTitles;
@@ -73,7 +73,7 @@ class StackedPlotPanel extends JPanel {
 				: (min * (1 + SCALE_EXTRA_DISTANCE_FACTOR)) ;
 		double scaleFactor = (double)(WORKABLE_WIDTH_PIX) / (scaleMax - scaleMin);
 		double incrementAmt = (scaleMax-scaleMin) / NUM_OF_TICKS;
-		if (Math.floor(incrementAmt) > 1)
+		if (Math.floor(incrementAmt) > MIN_TRUNCATE_VALUE)
 			incrementAmt = Math.floor(incrementAmt);
 		for (double i = scaleMin; i <= scaleMax; i += incrementAmt)
 		{
