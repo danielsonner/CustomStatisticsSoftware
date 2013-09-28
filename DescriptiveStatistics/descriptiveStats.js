@@ -1,4 +1,4 @@
-var submitData, resetData, i, ROUNDINGFIXER;
+var submitData, resetData, i, ROUNDINGFIXER, MAX_STDEV_DECI;
 
 submitData = function () {
   var data = $('#dataField').val();
@@ -67,19 +67,24 @@ submitData = function () {
     sum += (dataArray[i] - mean)*(dataArray[i] - mean);
   }
   
-  var stdev = Math.sqrt(sum / (dataArray.length - 1));
+  // Limit stdev to 5 decimals
+  var stdev = Math.round(Math.sqrt(sum / (dataArray.length - 1)) * MAX_STDEV_DECI) / MAX_STDEV_DECI;
+  var IQR = Math.round((dataArray[3] - dataArray[1]) * ROUNDINGFIXER) / ROUNDINGFIXER;
+  var range = Math.round((dataArray[4] - dataArray[0]) * ROUNDINGFIXER) / ROUNDINGFIXER;
   
   // Display the results in the output area
   var displayableHTML = 'Min: ' + fiveNumSum[0] + '<br /> Q1: ' + fiveNumSum[1] +
     '<br /> Median: ' + fiveNumSum[2] + '<br /> Q3: ' + fiveNumSum[3] +
     '<br /> Max: ' + fiveNumSum[4] + '<br /> Mean: ' + mean + 
     '<br /> Standard Deviation \(sample\):' + stdev+ '<br /> n \= ' + dataArray.length +
+    '<br /> IQR: ' + IQR + '<br /> Range: ' + range +
     '<br /> <br /> <u> Copy Paste to Excel Formatted: </u> <br />';
   for (i = 0; i < 5; i++) 
   {
     displayableHTML += fiveNumSum[i] + '<br />';
   }
-  displayableHTML += mean + '<br />' + stdev + '<br /> n = ' + dataArray.length;
+  displayableHTML += mean + '<br />' + stdev + '<br />' + dataArray.length
+  + '<br />' + IQR + '<br />' + range;
   $('#outputArea').html(displayableHTML);
 };
 
@@ -92,6 +97,7 @@ $(document).ready(function(){
   // This variable is used because javascript has a poor 
   // implementation of small fractions ops (like .1 + .2)
   ROUNDINGFIXER = 100000;
+  MAX_STDEV_DECI = 1000000;
   $('#submitData').click(submitData);
   $('#reset').click(resetData);
 });
