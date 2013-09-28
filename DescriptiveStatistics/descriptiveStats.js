@@ -100,4 +100,11 @@ $(document).ready(function(){
   MAX_STDEV_DECI = 1000000;
   $('#submitData').click(submitData);
   $('#reset').click(resetData);
+  
+  // Bind the submit button the the enter key
+  $(document).keyup(function(event){
+      if(event.keyCode == 13) {
+          $("#submitData").click();
+      }
+  });
 });
