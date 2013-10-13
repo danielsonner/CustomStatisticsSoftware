@@ -69,8 +69,8 @@ submitData = function () {
   
   // Limit stdev to 5 decimals
   var stdev = Math.round(Math.sqrt(sum / (dataArray.length - 1)) * MAX_STDEV_DECI) / MAX_STDEV_DECI;
-  var IQR = Math.round((dataArray[3] - dataArray[1]) * ROUNDINGFIXER) / ROUNDINGFIXER;
-  var range = Math.round((dataArray[4] - dataArray[0]) * ROUNDINGFIXER) / ROUNDINGFIXER;
+  var IQR = Math.round((fiveNumSum[3] - fiveNumSum[1]) * ROUNDINGFIXER) / ROUNDINGFIXER;
+  var range = Math.round((fiveNumSum[4] - fiveNumSum[0]) * ROUNDINGFIXER) / ROUNDINGFIXER;
   
   // Display the results in the output area
   var displayableHTML = 'Min: ' + fiveNumSum[0] + '<br /> Q1: ' + fiveNumSum[1] +
