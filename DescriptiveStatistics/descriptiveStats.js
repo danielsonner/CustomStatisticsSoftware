@@ -26,7 +26,7 @@ submitData = function () {
   }
   else
   {
-    fiveNumSum.push(dataArray[Math.floor(dataArray.length/3) -1]);
+    fiveNumSum.push(dataArray[Math.floor(dataArray.length/4)]);
   }
   // M
   if (dataArray.length%2 === 0)
@@ -47,7 +47,7 @@ submitData = function () {
   }
   else
   {
-    fiveNumSum.push(dataArray[dataArray.length - Math.floor(dataArray.length/3)]);
+    fiveNumSum.push(dataArray[Math.round(dataArray.length/2) + Math.floor(dataArray.length/4)]);
   }
   // Max
   fiveNumSum.push(dataArray[dataArray.length - 1]);
