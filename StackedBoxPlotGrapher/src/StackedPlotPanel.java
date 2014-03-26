@@ -13,6 +13,7 @@ class StackedPlotPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	final static int WORKABLE_WIDTH_PIX = 700;
 	final static int WORKABLE_HEIGHT_PIX = 500;
+	final static int AXIS_LABEL_BELOW_WORKABLE_HEIGHT = 50;
 	final static int MARGIN_LEFT = 30;
 	final static int LABEL_LOWER_AMT = 20;
 	final static int NUM_OF_TICKS = 6;
@@ -24,6 +25,7 @@ class StackedPlotPanel extends JPanel {
 
 	private ArrayList<ArrayList<Double>> data;
 	private ArrayList<String> boxPlotTitles;
+	private String axisTitle;
 	private DecimalFormat numberFormat = new DecimalFormat("#.00");
 
 	// Used to create a scale
@@ -33,13 +35,16 @@ class StackedPlotPanel extends JPanel {
 	 * Constructs a new JPanel for the Stacked Boxplot
 	 * @param d an array list of array lists of the data
 	 * @param titles an array list of the titles for each dataset in the order
+	 * @param axisTitle the title for the axis at the bottom
 	 * they appear in ArrayList d.
 	 */
-	public StackedPlotPanel(ArrayList<ArrayList<Double>> d, ArrayList<String> titles)
+	public StackedPlotPanel(ArrayList<ArrayList<Double>> d, ArrayList<String> titles, 
+			String axisTitle)
 	{
 		super();
 		data = d;
 		boxPlotTitles = titles;
+		this.axisTitle = axisTitle;
 		for (int i = 0; i < data.size(); i++)
 		{
 			double currentMax = Collections.max(data.get(i));
@@ -138,7 +143,9 @@ class StackedPlotPanel extends JPanel {
 				g.fillOval(x, y, circleDiameter, circleDiameter);
 			}
 		}
-		
+		// Draw the title for the axis
+		g.drawString(axisTitle, WORKABLE_WIDTH_PIX/2, 
+				WORKABLE_HEIGHT_PIX + AXIS_LABEL_BELOW_WORKABLE_HEIGHT);
 	}
 
 	/**

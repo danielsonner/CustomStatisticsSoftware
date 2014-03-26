@@ -29,6 +29,8 @@ public class StackedPlot {
 					"excel into this textbox.")));
 			boxPlotTitles.add(JOptionPane.showInputDialog("Title for Boxplot " + (i+1)));
 		}
+		String axisLabel = JOptionPane.showInputDialog("Label for Axis (ex:" +
+				" \"Height in inches\")");
 		
 		// Generate the graph
 		JFrame frmMyWindow = new JFrame("Stacked Box Plotter");
@@ -36,7 +38,7 @@ public class StackedPlot {
 		// centers it
 		frmMyWindow.setLocationRelativeTo(null);
 		frmMyWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmMyWindow.add(new StackedPlotPanel(data, boxPlotTitles));
+		frmMyWindow.add(new StackedPlotPanel(data, boxPlotTitles, axisLabel));
 		frmMyWindow.setVisible(true);
 	}
 	
